@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="definitions_0hth8fw" name="definitions" namespace="http://camunda.org/schema/1.0/dmn" exporter="dmn-js (https://demo.bpmn.io/dmn)" exporterVersion="12.1.0">
+  <decision id="decision_1ndeqzk" name="Contact type">
+    <informationRequirement id="InformationRequirement_0ohsunx">
+      <requiredInput href="#InputData_1m04fmp" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1orlsza">
+      <requiredInput href="#InputData_07bboev" />
+    </informationRequirement>
+    <authorityRequirement id="AuthorityRequirement_08plu5v">
+      <requiredAuthority href="#KnowledgeSource_0pgzz3y" />
+    </authorityRequirement>
+    <decisionTable id="decisionTable_1709voe" biodi:annotationsWidth="552">
+      <input id="InputClause_0zbh1os" label="Symptoms">
+        <inputExpression id="LiteralExpression_03kr96a" typeRef="boolean">
+          <text>symptoms</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_079t996" label="Close contact">
+        <inputExpression id="LiteralExpression_1e8343o" typeRef="boolean">
+          <text>close_contact</text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="Contact type" name="contact_type" typeRef="string" biodi:width="421" />
+      <rule id="DecisionRule_1wslx0x">
+        <description></description>
+        <inputEntry id="UnaryTests_1hveplv">
+          <text>Yes</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12j5wnw">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rbtsia">
+          <text>"Symptoms"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0418otl">
+        <description></description>
+        <inputEntry id="UnaryTests_0h8y47a">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qvwguj">
+          <text>Yes</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kwrv2g">
+          <text>"Contact"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_055yku3">
+        <description></description>
+        <inputEntry id="UnaryTests_1k0vy53">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_080tyax">
+          <text>No</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gs13rj">
+          <text>"None"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_1vt6770" name="Action type">
+    <informationRequirement id="InformationRequirement_0004f4j">
+      <requiredInput href="#InputData_09b0jwb" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0fj2l4y">
+      <requiredInput href="#InputData_0v6d8bl" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1tquamb">
+      <requiredInput href="#InputData_081etws" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1yhfcjq">
+      <requiredInput href="#InputData_030bo9a" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1vvx34h">
+      <requiredInput href="#InputData_05ixri6" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0xjqykq">
+      <requiredDecision href="#decision_1ndeqzk" />
+    </informationRequirement>
+    <authorityRequirement id="AuthorityRequirement_07d7c7z">
+      <requiredAuthority href="#KnowledgeSource_0w4wmxt" />
+    </authorityRequirement>
+    <decisionTable id="DecisionTable_1ylaw82" biodi:annotationsWidth="400">
+      <input id="InputClause_1m2oe1h" label="Contact type">
+        <inputExpression id="LiteralExpression_0j5d134" typeRef="string">
+          <text>contact_type</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0gkjy05" label="Recovery certificate">
+        <inputExpression id="LiteralExpression_1a35aqf" typeRef="boolean">
+          <text>recovery_certificate</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1qsmtou" label="Booster shot" biodi:width="197">
+        <inputExpression id="LiteralExpression_1qqrm7r" typeRef="boolean">
+          <text>booster_shot</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1csp6hp" label="Vaccination" biodi:width="150">
+        <inputExpression id="LiteralExpression_1v49sd6" typeRef="boolean">
+          <text>vaccination</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1c5ql81" label="Age" biodi:width="150">
+        <inputExpression id="LiteralExpression_166qhen" typeRef="integer">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1jis0mv" label="Last dose of basic vaccination" biodi:width="287">
+        <inputExpression id="LiteralExpression_0nlnpsc" typeRef="integer">
+          <text>last_dose</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0nukby2" label="Action type" name="action_type" typeRef="string" biodi:width="166" />
+      <rule id="DecisionRule_1vain5j">
+        <description>"Do a COVID test - if you test positive, isolate yourself for 7 days and follow 
+these steps: https://www.info-coronavirus.be/en/quarantine-isolation/."</description>
+        <inputEntry id="UnaryTests_0qtipcm">
+          <text>"Symptoms"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13rrded">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i1jrmk">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bhjb1u">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j27j3l">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qg0qtq">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0oqbwjs">
+          <text>"Do test"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ko2jev">
+        <description>"You do not have to quarantine, but you must follow the preventive 
+measures (mouth mask (preferably FFP2), distance, avoid contact with 
+vulnerable people, etc.) until the 10th day after the high-risk contact.
+ You can find more info on quarantine procedures here: 
+https://www.info-coronavirus.be/en/quarantine-isolation/."</description>
+        <inputEntry id="UnaryTests_0rmcqsb">
+          <text>"Contact"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19urw12">
+          <text>Yes</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y15fiv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0itxczj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0idscmd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08aor9o">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jr2zno">
+          <text>"No quarantine"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xkmn8d">
+        <description>"You do not have to quarantine, but you must follow the preventive 
+measures (mouth mask (preferably FFP2), distance, avoid contact with 
+vulnerable people, etc.) until the 10th day after the high-risk contact.
+ You can find more info on quarantine procedures here: 
+https://www.info-coronavirus.be/en/quarantine-isolation/."</description>
+        <inputEntry id="UnaryTests_1a63vxr">
+          <text>"Contact"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jfz319">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1efz9rv">
+          <text>Yes</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07jpf0h">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sl1zph">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1iksinl">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wwxafa">
+          <text>"No quarantine"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xhzxt0">
+        <description>"You do not have to quarantine, but you must follow the preventive 
+measures (mouth mask (preferably FFP2), distance, avoid contact with 
+vulnerable people, etc.) until the 10th day after the high-risk contact.
+ You can find more info on quarantine procedures here: 
+https://www.info-coronavirus.be/en/quarantine-isolation/."</description>
+        <inputEntry id="UnaryTests_1tormim">
+          <text>"Contact"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cuwvng">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i5lskf">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02wn0ua">
+          <text>Yes</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n15qge">
+          <text>[5..17]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_101dr2j">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h22pmo">
+          <text>"No quarantine"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1pwv1wk">
+        <description>"You do not have to quarantine, but you must follow the preventive 
+measures (mouth mask (preferably FFP2), distance, avoid contact with 
+vulnerable people, etc.) until the 10th day after the high-risk contact.
+ You can find more info on quarantine procedures here: 
+https://www.info-coronavirus.be/en/quarantine-isolation/."</description>
+        <inputEntry id="UnaryTests_1en6j5u">
+          <text>"Contact"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fyjhs8">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0id0oiy">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tko98m">
+          <text>Yes</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0msiocy">
+          <text>&gt;= 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1onwqpf">
+          <text>[0..5]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12rmph1">
+          <text>"No quarantine"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1iputtm">
+        <description>"You must go into quarantine for 7 days. From day 4 you can leave the 
+quarantine on condition that you take a negative self-test daily until 
+the 7th day after the high-risk contact. You must comply with the 
+preventive measures (mouth mask (preferably FFP2), distance, avoid 
+contact with vulnerable people, etc.) until the 10th day after the 
+high-risk contact. You can find more info on quarantine procedures here:
+ https://www.info-coronavirus.be/en/quarantine-isolation/."</description>
+        <inputEntry id="UnaryTests_19gyat3">
+          <text>"Contact"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gdy9bt">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07tp2eo">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wzw8b7">
+          <text>Yes</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13zbjyv">
+          <text>&gt;= 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v7mkho">
+          <text>]5..14]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_141tgzy">
+          <text>"Go 7 days into quarantine"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1na9pt3">
+        <description>"You must go into quarantine for 10 days. From day 7 you can leave the 
+quarantine on condition that you take a negative self-test daily until 
+the 10th day after the high-risk contact. You must comply with the 
+preventive measures (mouth mask (preferably FFP2), distance, avoid 
+contact with vulnerable people, etc.) until the 10th day after the 
+high-risk contact. You can find more info on quarantine procedures here:
+ https://www.info-coronavirus.be/en/quarantine-isolation/."</description>
+        <inputEntry id="UnaryTests_13lsr8n">
+          <text>"Contact"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0siqeyo">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cnzeor">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_138b0yg">
+          <text>No</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00qaqqt">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16a047k">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15b331h">
+          <text>"Go 10 days into quarantine"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18vz31z">
+        <description>"You are fine, you don't have to quarantine or isolate yourself." </description>
+        <inputEntry id="UnaryTests_0bhji6x">
+          <text>"None"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04r53h9">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01kev51">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jzdc37">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cxf9jo">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1d52fzj">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0omedwo">
+          <text>"Everything is good"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1m04fmp" name="Symptoms" />
+  <inputData id="InputData_09b0jwb" name="Vaccination" />
+  <inputData id="InputData_0v6d8bl" name="Age" />
+  <inputData id="InputData_081etws" name="Booster shot" />
+  <inputData id="InputData_030bo9a" name="Last dose of basic vaccination" />
+  <knowledgeSource id="KnowledgeSource_0pgzz3y" name="Covid-19 info Belgian government" />
+  <knowledgeSource id="KnowledgeSource_0w4wmxt" name="Covid-19 actions Belgian government" />
+  <inputData id="InputData_07bboev" name="Close contact" />
+  <inputData id="InputData_05ixri6" name="Recovery certificate" />
+  <textAnnotation id="TextAnnotation_0g5eg4p">
+    <text>*?:Have you received a booster shot?</text>
+  </textAnnotation>
+  <association id="Association_0smi8tp">
+    <sourceRef href="#TextAnnotation_0g5eg4p" />
+    <targetRef href="#InputData_081etws" />
+  </association>
+  <textAnnotation id="TextAnnotation_0cf8hhc">
+    <text>*?:Have you received your last dose of basic vaccination?</text>
+  </textAnnotation>
+  <association id="Association_0yjflk4">
+    <sourceRef href="#TextAnnotation_0cf8hhc" />
+    <targetRef href="#InputData_09b0jwb" />
+  </association>
+  <textAnnotation id="TextAnnotation_0jc3lac">
+    <text>*?:How many months ago did you receive your last dose of basic vaccination?</text>
+  </textAnnotation>
+  <association id="Association_1k5eb6f">
+    <sourceRef href="#TextAnnotation_0jc3lac" />
+    <targetRef href="#InputData_030bo9a" />
+  </association>
+  <textAnnotation id="TextAnnotation_19fsung">
+    <text>*?:Do you show symptoms?</text>
+  </textAnnotation>
+  <association id="Association_0fa0hsv">
+    <sourceRef href="#TextAnnotation_19fsung" />
+    <targetRef href="#InputData_1m04fmp" />
+  </association>
+  <textAnnotation id="TextAnnotation_1ejk6qk">
+    <text>*?: How old are you? Note: Children &lt;b&gt;under 5&lt;/b&gt; cannot be vaccinated in Belgium, see more on: &lt;a href="https://bit.ly/35OX98H"&gt;https://bit.ly/35OX98H&lt;/a&gt;</text>
+  </textAnnotation>
+  <association id="Association_0yym3js">
+    <sourceRef href="#TextAnnotation_1ejk6qk" />
+    <targetRef href="#InputData_0v6d8bl" />
+  </association>
+  <textAnnotation id="TextAnnotation_1j6sbex">
+    <text>*?: Have you come into contact with anyone who might be ill right now? Were you in contact with this person for some time (more than 15 minutes) and up close (within a distance of 1.5 metres)? (For example: a housemate, a colleague sitting next to you in the office, a friend from school)</text>
+  </textAnnotation>
+  <association id="Association_0dogtw8">
+    <sourceRef href="#TextAnnotation_1j6sbex" />
+    <targetRef href="#InputData_07bboev" />
+  </association>
+  <textAnnotation id="TextAnnotation_0lyygiw">
+    <text>*?:Do you have a certificate stating that you recovered from Covid-19 less than 5 months ago?</text>
+  </textAnnotation>
+  <association id="Association_0enwmel">
+    <sourceRef href="#TextAnnotation_0lyygiw" />
+    <targetRef href="#InputData_05ixri6" />
+  </association>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_06cezvp">
+      <dmndi:DMNShape id="DMNShape_0eu4f81" dmnElementRef="decision_1ndeqzk">
+        <dc:Bounds height="80" width="180" x="620" y="620" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_00gz09g" dmnElementRef="Decision_1vt6770">
+        <dc:Bounds height="80" width="180" x="620" y="420" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_04mzber" dmnElementRef="InputData_1m04fmp">
+        <dc:Bounds height="45" width="125" x="757" y="747" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0vyc73k" dmnElementRef="InformationRequirement_0ohsunx">
+        <di:waypoint x="820" y="747" />
+        <di:waypoint x="740" y="720" />
+        <di:waypoint x="740" y="700" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0vzun4g" dmnElementRef="InputData_09b0jwb">
+        <dc:Bounds height="45" width="125" x="278" y="257" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1tiy9jv" dmnElementRef="InputData_0v6d8bl">
+        <dc:Bounds height="45" width="125" x="467" y="257" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0k5019v" dmnElementRef="InputData_081etws">
+        <dc:Bounds height="45" width="125" x="647" y="257" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_183ap58" dmnElementRef="InputData_030bo9a">
+        <dc:Bounds height="45" width="125" x="817" y="257" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0qfpam5" dmnElementRef="InformationRequirement_0004f4j">
+        <di:waypoint x="341" y="302" />
+        <di:waypoint x="650" y="400" />
+        <di:waypoint x="650" y="420" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0eagp7o" dmnElementRef="InformationRequirement_0fj2l4y">
+        <di:waypoint x="530" y="302" />
+        <di:waypoint x="680" y="400" />
+        <di:waypoint x="680" y="420" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_16havf4" dmnElementRef="InformationRequirement_1tquamb">
+        <di:waypoint x="710" y="302" />
+        <di:waypoint x="710" y="400" />
+        <di:waypoint x="710" y="420" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_085tp5y" dmnElementRef="InformationRequirement_1yhfcjq">
+        <di:waypoint x="880" y="302" />
+        <di:waypoint x="740" y="400" />
+        <di:waypoint x="740" y="420" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0jgrpqy" dmnElementRef="TextAnnotation_0g5eg4p">
+        <dc:Bounds height="80" width="100" x="690" y="110" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1wrnoqk" dmnElementRef="Association_0smi8tp">
+        <di:waypoint x="696" y="190" />
+        <di:waypoint x="735" y="257" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1mqhqr8" dmnElementRef="TextAnnotation_0cf8hhc">
+        <dc:Bounds height="80" width="100" x="160" y="110" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_06ltwn3" dmnElementRef="Association_0yjflk4">
+        <di:waypoint x="250" y="190" />
+        <di:waypoint x="319" y="257" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1krzi87" dmnElementRef="TextAnnotation_0jc3lac">
+        <dc:Bounds height="80" width="112" x="914" y="110" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_003rh90" dmnElementRef="Association_1k5eb6f">
+        <di:waypoint x="952" y="190" />
+        <di:waypoint x="924" y="257" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0uzddc4" dmnElementRef="KnowledgeSource_0pgzz3y">
+        <dc:Bounds height="63" width="100" x="960" y="558" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_096wy6i" dmnElementRef="AuthorityRequirement_08plu5v">
+        <di:waypoint x="960" y="590" />
+        <di:waypoint x="800" y="660" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1r2y9f0" dmnElementRef="TextAnnotation_19fsung">
+        <dc:Bounds height="80" width="100" x="960" y="730" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1y2mc0y" dmnElementRef="Association_0fa0hsv">
+        <di:waypoint x="960" y="770" />
+        <di:waypoint x="882" y="770" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_061vn69" dmnElementRef="KnowledgeSource_0w4wmxt">
+        <dc:Bounds height="63" width="100" x="291" y="428" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0r92z89" dmnElementRef="AuthorityRequirement_07d7c7z">
+        <di:waypoint x="391" y="460" />
+        <di:waypoint x="620" y="460" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1jbu1vi" dmnElementRef="TextAnnotation_1ejk6qk">
+        <dc:Bounds height="130" width="240" x="390" y="85" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0te5351" dmnElementRef="Association_0yym3js">
+        <di:waypoint x="550" y="215" />
+        <di:waypoint x="516" y="257" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0oih66m" dmnElementRef="InputData_07bboev">
+        <dc:Bounds height="45" width="125" x="527" y="747" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_03xan7g" dmnElementRef="InformationRequirement_1orlsza">
+        <di:waypoint x="590" y="747" />
+        <di:waypoint x="680" y="720" />
+        <di:waypoint x="680" y="700" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0pw72w1" dmnElementRef="TextAnnotation_1j6sbex">
+        <dc:Bounds height="310" width="100" x="260" y="615" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0rjczau" dmnElementRef="Association_0dogtw8">
+        <di:waypoint x="360" y="655" />
+        <di:waypoint x="527" y="770" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1s80xys" dmnElementRef="InputData_05ixri6">
+        <dc:Bounds height="45" width="125" x="1007" y="257" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_10vgy3t" dmnElementRef="InformationRequirement_1vvx34h">
+        <di:waypoint x="1070" y="302" />
+        <di:waypoint x="770" y="400" />
+        <di:waypoint x="770" y="420" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_16d7jwc" dmnElementRef="TextAnnotation_0lyygiw">
+        <dc:Bounds height="111" width="100" x="1130" y="114" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1pe1s98" dmnElementRef="Association_0enwmel">
+        <di:waypoint x="1139" y="225" />
+        <di:waypoint x="1087" y="257" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_19ywfke" dmnElementRef="InformationRequirement_0xjqykq">
+        <di:waypoint x="710" y="620" />
+        <di:waypoint x="710" y="520" />
+        <di:waypoint x="710" y="500" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

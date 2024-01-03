@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="BMI" name="BMI" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <decision id="BMILevel" name="BMI Level">
+    <informationRequirement id="InformationRequirement_1xwbpip">
+      <requiredInput href="#InputData_0pgvdj9" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_019my0n">
+      <requiredDecision href="#bmi" />
+    </informationRequirement>
+    <authorityRequirement id="AuthorityRequirement_18s6tyy">
+      <requiredAuthority href="#KnowledgeSource_0b8hnqo" />
+    </authorityRequirement>
+    <decisionTable id="DecisionTable_1cal1ui">
+      <input id="InputClause_1acmlkd" label="BMI" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0bqgrlg" typeRef="double">
+          <text>bmi</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0bo3uen" label="Sex" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0d6l79o" typeRef="string">
+          <text>sex</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_16jystb">
+          <text>"Male","Female"</text>
+        </inputValues>
+      </input>
+      <output id="OuputClause_99999" label="BMI Level" name="BMILevel" typeRef="string" />
+      <rule id="row-506282952-7">
+        <description></description>
+        <inputEntry id="UnaryTests_03g3ci0">
+          <text>&lt;18.5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jb8hau">
+          <text>"Male"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kr45vj">
+          <text>"Severely Underweight"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-8">
+        <inputEntry id="UnaryTests_1ckv0bb">
+          <text>&lt;18.5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1joyits">
+          <text>"Female"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_139n7gl">
+          <text>"Underweight"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-9">
+        <inputEntry id="UnaryTests_05rspiy">
+          <text>[18.5..24.9]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15yl6ki">
+          <text>"Male"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0bzfo47">
+          <text>"Underweight"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-10">
+        <inputEntry id="UnaryTests_0mk75lc">
+          <text>[18.5..24.9]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18uxmko">
+          <text>"Female"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00nwn3e">
+          <text>"Normal"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-11">
+        <inputEntry id="UnaryTests_11o8pqj">
+          <text>[25..29.9]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1298ow3">
+          <text>"Male"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0z18erz">
+          <text>"Normal"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-12">
+        <inputEntry id="UnaryTests_0shocr0">
+          <text>[25..29.9]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nblyrk">
+          <text>"Female"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0s2fq8r">
+          <text>"Overweight"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_087q1ff">
+        <inputEntry id="UnaryTests_0fr6nyr">
+          <text>&gt;29.9</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04vbze2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19pjpwj">
+          <text>"Obese"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="weight" name="Weight" />
+  <inputData id="length" name="Length" />
+  <inputData id="InputData_0pgvdj9" name="Sex" />
+  <knowledgeSource id="KnowledgeSource_0b8hnqo" name="BMI Guidelines" />
+  <businessKnowledgeModel id="BusinessKnowledgeModel_0kg4xx6" name="BMI Logic" />
+  <decision id="bmi" name="BMI">
+    <informationRequirement id="InformationRequirement_0u3ekdy">
+      <requiredInput href="#weight" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1712so7">
+      <requiredInput href="#length" />
+    </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_0xa0c9g">
+      <requiredKnowledge href="#BusinessKnowledgeModel_0kg4xx6" />
+    </knowledgeRequirement>
+    <decisionTable id="DecisionTable_0ht1rfg">
+      <input id="InputClause_1mprybz" label="Weight">
+        <inputExpression id="LiteralExpression_0jv6mku" typeRef="double">
+          <text>weight</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0pfuvza" label="length">
+        <inputExpression id="LiteralExpression_0hi2tyd" typeRef="double">
+          <text>length</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1eeiz56" label="bmi" name="bmi" typeRef="double" />
+      <rule id="DecisionRule_0ksprwc">
+        <inputEntry id="UnaryTests_0w0r5tu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08nk67x">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1klz7gl">
+          <text>weight/(length*length)</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_0zozu7y">
+      <dmndi:DMNShape id="DMNShape_0e5yvnb" dmnElementRef="BMILevel">
+        <dc:Bounds height="80" width="180" x="545" y="81" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_14ye8lm" dmnElementRef="InformationRequirement_1xwbpip">
+        <di:waypoint x="726" y="234" />
+        <di:waypoint x="678" y="161" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_00veh7a" dmnElementRef="AuthorityRequirement_18s6tyy">
+        <di:waypoint x="417" y="126" />
+        <di:waypoint x="544" y="121" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0wc2j8c" dmnElementRef="InformationRequirement_019my0n">
+        <di:waypoint x="538" y="235" />
+        <di:waypoint x="613" y="161" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0sabx33" dmnElementRef="weight">
+        <dc:Bounds height="45" width="125" x="320" y="394" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0edmjfg" dmnElementRef="length">
+        <dc:Bounds height="45" width="125" x="543" y="396" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_16h2mvq" dmnElementRef="InputData_0pgvdj9">
+        <dc:Bounds height="45" width="125" x="674" y="234" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_09oin51" dmnElementRef="KnowledgeSource_0b8hnqo">
+        <dc:Bounds height="63" width="100" x="317" y="94" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_18hjnh5" dmnElementRef="BusinessKnowledgeModel_0kg4xx6">
+        <dc:Bounds height="46" width="135" x="156" y="258" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1ge0tyi" dmnElementRef="bmi">
+        <dc:Bounds height="80" width="180" x="407" y="235" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0m2gvts" dmnElementRef="InformationRequirement_0u3ekdy">
+        <di:waypoint x="401" y="394" />
+        <di:waypoint x="461" y="315" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0cuha23" dmnElementRef="InformationRequirement_1712so7">
+        <di:waypoint x="590" y="396" />
+        <di:waypoint x="532" y="315" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1a2uaaz" dmnElementRef="KnowledgeRequirement_0xa0c9g">
+        <di:waypoint x="291" y="280" />
+        <di:waypoint x="403" y="279" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

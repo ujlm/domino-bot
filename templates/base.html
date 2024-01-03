@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08a7eb">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DoMiNo Chatbot</title>
+</head>
+<body>
+<div class="container">
+    <section class="instructions">
+        <span class="center-text">
+        <h1>Welcome to <b>Domino</b>!</h1>
+        <p>Thank you for testing out our chatbot.<br/>
+            To get started, click on the chat bubble in the lower right corner.</p>
+        </span>
+
+        <div class="quickstart">
+            <h3>Usage</h3>
+            <ul>
+                <li>Select a model</li>
+                <li>Answer the questions by typing a value or clicking a button</li>
+                <li>Domino will guide you towards a solution</li>
+            </ul>
+            <br/>
+            <h3>Basic commandos</h3>
+            <ul>
+                <li><b>Exit</b>: quit the current model</li>
+                <li><b>Back</b>: go back to the previous question</li>
+                <li><b>Hello</b>: (re)start the model</li>
+            </ul>
+            <br/>
+            <h3>Special commandos</h3>
+            <ul>
+                <li><b>Explain</b>: Explains the obtained solution</li>
+                <li><b>Unknown value</b>: Indicate that you don't know the value
+                    <br/>e.g. *Question: Where is the capital of Flanders?* Answer:<i>?</i>
+                </li>
+                <li><b>What if</b>: See what happens to the outcome if a variable is changed
+                    <br/>e.g.<i>What if length = 1.76?</i>
+                </li>
+                <li><b>What should</b>: find out the value a variable needs to have to obtain a certain outcome
+                    <br/>e.g.<i>What should desiredDish be to alter beverages?</i>
+                </li>
+                <li><b>How to get</b>: find out how to obtain a specific outcome
+                    <br/>e.g.<i>how to get beverages = Pinot_Noir?</i></li>
+                <li><b>Other paths</b>: find all paths that lead to the outcome you just obtained
+                    <br/>e.g. *Outcome is obtained* : <i>other paths</i></li>
+            </ul>
+        </div>
+    </section>
+    <div class="chatbox">
+        <div class="chatbox__support" id="chatbox_support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">Domino</h4>
+                    <p class="chatbox__description--header">Hi, I'm your DMN chatbot. How can I help you?</p>
+                </div>
+            </div>
+            <div class="chatbox__messages">
+                <div></div>
+            </div>
+            <div class="chatbox__footer">
+                <input type="text" placeholder="Write a message...">
+                <button class="chatbox__send--footer send__button" id="send_btn">Send</button>
+            </div>
+        </div>
+        <div class="chatbox__button" id="chatbox_btn">
+            <button><img src="{{ url_for('static', filename='images/chatbox-icon.svg') }}" /></button>
+        </div>
+    </div>
+</div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
